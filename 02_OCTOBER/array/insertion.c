@@ -16,10 +16,10 @@ void output(int *arr, int n) {
 void insert(int *arr, int *n, int num, int position) {
     int i;
     *n = *n + 1;
-    for (i = *n - 1; i < position; i--){
+    for (i = *n - 1; i > position; i--) {
         *(arr + i) = *(arr + i - 1);
     }
-    *(arr + (--position)) = num;
+    *(arr + position) = num;
 }
 int main() {
     int arr[50], n, num, position;
@@ -31,6 +31,6 @@ int main() {
     scanf("%d", &num);
     printf("Enter the position where to insert: ");
     scanf("%d", &position);
-    insert(arr, &n, num, position);
+    insert(arr, &n, num, --position);
     printf("New array is\n");output(arr, n);
 }
