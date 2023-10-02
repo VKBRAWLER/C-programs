@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-struct node { int data; struct node *next; }; // created type for node
-typedef struct node NODE;
+typedef struct node { int data; struct node *next; } NODE; // created type for node
 void insert_last(NODE **head, int new_data) {
     NODE *newnode = (struct  node *)malloc(sizeof(NODE)); // allocate memory for new node
     newnode->data = new_data; // set data pointer
