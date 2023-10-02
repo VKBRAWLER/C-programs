@@ -32,7 +32,7 @@ int main() {
         case 1:
             printf("Enter the value you want to add: ");
             scanf("%d", &value);
-            push(stack, value);
+            push(&stack, value);
             break;
         case 2:
             pop(stack);
