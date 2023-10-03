@@ -22,7 +22,7 @@ void display (STACK *stack) {
 }
 int main() {
     int value, choice;
-    STACK *stack;
+    STACK *stack = (STACK *)malloc(sizeof(STACK));
     stack->top = -1;
     while(1) {
         printf("\nENter choice: ");
