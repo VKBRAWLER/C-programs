@@ -7,7 +7,6 @@ typedef struct Stack {
 } STACK;
 void push (STACK *stack, int value) {
     if (stack->top == MAX_SIZE - 1) {printf("stack is full\n"); return; }
-    printf("\t%d\t",stack->top);
     stack->items[++(stack->top)] = value;
 }
 void pop (STACK *stack) {
@@ -32,7 +31,7 @@ int main() {
         case 1:
             printf("Enter the value you want to add: ");
             scanf("%d", &value);
-            push(&stack, value);
+            push(stack, value);
             break;
         case 2:
             pop(stack);
