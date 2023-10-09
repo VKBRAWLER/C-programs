@@ -5,6 +5,7 @@ typedef struct node {
     struct node *next;
 } STACK;
 int main() {
+    STACK *stack = (STACK *) malloc(sizeof(STACK));
     int value, choice;
     while(1) {
         printf("\nENter choice: ");
