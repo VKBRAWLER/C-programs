@@ -2,24 +2,18 @@
 #include<stdio.h>
 #include<stdlib.h>
 typedef struct ProductStruct {
-  char Product_Id;
+  char Product_Id, Product_Grade;
   char* Product_Name;
   int Total_sale;
-  char Product_Grade;
-  int position;
   struct ProductStruct* next;
 } Product;
 int count(Product* rear) {
   int i = 0;
-  Product* p = rear;
-  while (p != NULL) {
-    i++;
-    p = p->next;
-  }
+  for (Product* p = rear; p != NULL; p = p->next) { i++; }
   return i;
 }
 void Insert (Product** front, Product** rear) {
-  Product* P = (Product*) malloc(sizeof(Product*));
+  Product* P = (Product*) malloc(sizeof(Product));
   if (count(*rear) >= 5) { printf("Stack Overflow\n"); return; }
   if (*front) { (*front)->next = P; }
   *front = P;
@@ -27,6 +21,13 @@ void Insert (Product** front, Product** rear) {
   fflush(stdin);
   printf("Enter Product ID: ");
   scanf("%c", &P->Product_Id);
+  printf("Enter Product Name: ");
+  scanf("%s", &P->Product_Name);
+  printf("Enter Total Sales: ");
+  scanf("%d", &P->Total_sale);
+  printf("Enter Product Grade: ");
+  fflush(stdin);
+  scanf("%c", &P->Product_Grade);
   P->next = NULL;
 }
 void Delete (Product** front, Product** rear) {
@@ -36,36 +37,21 @@ void Delete (Product** front, Product** rear) {
   if (!*rear) { *front = NULL; }
 }
 void Display(Product* rear) {
-  Product* p = rear;
-  while (p != NULL) {
-    printf(" %c ->",p->Product_Id);
-    p = p->next;
-  }
+  for (Product* p = rear; p != NULL; p = p->next) { printf(" %c ->", p->Product_Id); }
   printf("NULL\n");
 }
 int main() {
-  Product* front = NULL;
-  Product* rear = NULL;
+  Product *front = NULL, *rear = NULL;
   int choice;
   while (1) {
-    printf("Enter your choice: ");
-    fflush(stdin);
+    printf("\nEnter your choice:\n 1. Insert\n 2. Delete\n 3. Display\n 4. Exit\n ");
     scanf("%d", &choice);
     switch (choice) {
-    case 1:
-      Insert(&front, &rear);
-      break;
-    case 2:
-      Delete(&front, &rear);
-      break;
-    case 3:
-      Display(rear);
-      break;
-    default:
-    free(front);
-    free(rear);
-      exit(1);
-      break;
+    case 1: Insert(&front, &rear); break;
+    case 2: Delete(&front, &rear); break;
+    case 3: Display(rear); break;
+    case 4: printf("Exiting...\n"); free(front); free(rear); exit(0); break;
+    default: printf("Invalid Choice\n");
     }
   }
 }
