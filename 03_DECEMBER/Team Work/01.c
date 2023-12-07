@@ -18,22 +18,22 @@ int count(Product* rear) {
   }
   return i;
 }
-void Insert (Product* front, Product* rear) {
+void Insert (Product** front, Product** rear) {
   Product* P = (Product*) malloc(sizeof(Product*));
-  if (count(rear) >= 5) { printf("Stack Overflow\n"); return; }
-  if (front) { front->next = P; }
-  front = P;
-  if (!rear) { rear = P; }
+  if (count(*rear) >= 5) { printf("Stack Overflow\n"); return; }
+  if (*front) { (*front)->next = P; }
+  *front = P;
+  if (!*rear) { *rear = P; }
   fflush(stdin);
   printf("Enter Product ID: ");
-  scanf("%c", P->Product_Id);
+  scanf("%c", &P->Product_Id);
   P->next = NULL;
 }
-void Delete (Product* front, Product* rear) {
-  if (!count(rear)) { printf("Queue Underflow\n"); return; }
-  printf("Item %c poped out \n", rear->Product_Id);
-  rear = rear->next;
-  if (!rear) { front = NULL; }
+void Delete (Product** front, Product** rear) {
+  if (!count(*rear)) { printf("Queue Underflow\n"); return; }
+  printf("Item %c poped out \n", (*rear)->Product_Id);
+  *rear = (*rear)->next;
+  if (!*rear) { *front = NULL; }
 }
 void Display(Product* rear) {
   Product* p = rear;
@@ -53,10 +53,10 @@ int main() {
     scanf("%d", &choice);
     switch (choice) {
     case 1:
-      Insert(front, rear);
+      Insert(&front, &rear);
       break;
     case 2:
-      Delete(front, rear);
+      Delete(&front, &rear);
       break;
     case 3:
       Display(rear);
