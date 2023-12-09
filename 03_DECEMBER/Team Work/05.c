@@ -14,11 +14,12 @@ void InsertData(Node** L) {
   while(p->next != NULL) { p = p->next; }
   p->next = new;
 }
-void InsertNode(Node** L, Node* node) {
+void InsertNode(Node** L, Node** newnode) {
+  Node *node = *newnode;
+  node->next = NULL;
   if (!*L) { *L = node; return; }
   Node *p = *L;
   while(p->next != NULL) { p = p->next; }
-  node->next = NULL;
   p->next = node;
 }
 void Display(Node* L) {
@@ -31,12 +32,11 @@ int main() {
   printf("Enter the length of linked list: ");
   scanf("%d", &num);
   for (int i = 0; i < num; i++) { InsertData(&L); }
-   int c = 1;
+  int c = 1;
   for (Node* p = L; p != NULL; c++) {
-    Node* next = p->next;
-    printf("%d", next);
-    InsertNode(&temp, p);
-    p = next;
+    rear = p->next;
+    InsertNode(&temp, &p);
+    p = rear;
   }
   Display(temp);
 }
