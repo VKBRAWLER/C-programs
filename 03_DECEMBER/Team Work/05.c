@@ -50,7 +50,9 @@ int main() {
       rear = p->next;
     }
     InsertNode(&temp, &p);
+    printf("%d", p->data);
     p = rear;
+    if (p->next == NULL && c%2) break;
   }
   Display(temp);
 }
