@@ -34,7 +34,21 @@ int main() {
   for (int i = 0; i < num; i++) { InsertData(&L); }
   int c = 1;
   for (Node* p = L; p != NULL; c++) {
-    rear = p->next;
+    if (c%2) {
+      rear = p;
+      while (p->next != NULL) {
+        if (p->next->next == NULL) {
+          Node *d = p->next;
+          p->next = NULL;
+          p = d;
+          break;
+          }
+        p = p->next;
+      }
+    }
+    else {
+      rear = p->next;
+    }
     InsertNode(&temp, &p);
     p = rear;
   }
