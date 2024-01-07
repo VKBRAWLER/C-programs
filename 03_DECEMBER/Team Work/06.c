@@ -1,6 +1,5 @@
 //. Write a C program to create two link lists positive and negative from Original linked list, so that  positive linked list contains all positive elements and negative linked list contains negative elements.  Positive and negative linked lists should use the node of existing original linked list.
-#include<iostream>
-using namespace std;
+#include<stdio.h>
 typedef struct Node {
   int data; struct Node* next;
 } Node;
@@ -42,4 +41,4 @@ int main() {
   Display(positive);
   printf("Negetive: ");
   Display(negetive);
-}
+}   

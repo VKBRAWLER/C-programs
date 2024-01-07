@@ -32,7 +32,7 @@ int main() {
   printf("Enter the length of linked list: ");
   scanf("%d", &num);
   for (int i = 0; i < num; i++) { InsertData(&L); }
-  int c = 1;
+  int c = 0;
   for (Node* p = L; p != NULL; c++) {
     if (c%2) {
       rear = p;

@@ -26,6 +26,23 @@ Node *insert (Node* head, int x) {
   }
   return head;
 }
+Node *FindMax(Node *head, int x) {
+  if (x == 0) {
+    x = head->left->data;
+    if (head->left->right) { return FindMax(head->left, x); }
+    else {
+      Node *Replace = head->left;
+      head->left = Replace->left;
+      return Replace;
+    }
+  }
+  else if (head->right->right) { return FindMax(head->right, x); }
+  else {
+      Node *Replace = head->right;
+      head->right = Replace->left;
+      return Replace;
+    }
+}
 Node *Find(Node* head, int x, char* p) {
   if (head != NULL) {
     if (head->data == x) { *p = 's'; return NULL;}
@@ -43,13 +60,22 @@ Node *Find(Node* head, int x, char* p) {
      }
   }
 }
-void Delete (Node* head, int x) {
+Node *Delete (Node* head, int x) {
   Node *xParent = createNewNode();
   char p = '\0';
   xParent = Find(head, x, &p);
-  if (!p) { printf("element not found"); return; }
-  Node *xNode = (p=='l')? xParent->left: xParent->right;
-  if (xNode->left && xNode->right) { printf("Not possible"); return; }
+  if (!p) { printf("element not found"); return head; }
+  Node *xNode = head;
+  if (p == 'l') xNode = xParent->left;
+  else if (p == 'r') xNode = xParent->right;
+  if (xNode->left && xNode->right) {
+    Node *Replacement = FindMax(xNode, 0);
+    Replacement->left = xNode->left;
+    Replacement->right = xNode->right;
+    if (p == 's') { return Replacement; }
+    (p == 'l') ? (xParent->left = Replacement) : (xParent->right = Replacement);
+    return head;
+  }
   else {
     if (p == 'l') { 
       (xNode->left) ? (xParent->left = xNode->left) : (xParent->left = xNode->right);
@@ -57,7 +83,9 @@ void Delete (Node* head, int x) {
     if (p == 'r') { 
       (xNode->left) ? (xParent->right = xNode->left) : (xParent->right = xNode->right);
      }
-  }}
+    return head;
+  }
+}
 void Display (Node *head) {
   if (head != NULL) {
     Display(head->left);
@@ -81,7 +109,7 @@ int main() {
     if (x == -1) break;
     root = insert(root, x);
   }
-  Delete(root, 0);
+  root = Delete(root, 5);
   printf("\n");
   Display(root);
 }
