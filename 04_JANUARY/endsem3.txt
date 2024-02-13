@@ -1,0 +1,10 @@
+tree
+types of tree
+shorting
+linkedlist
+avl, b, b+, threded b, huffman
+khusal's and dikshtash
+
+merge short
+hash collision
+s
